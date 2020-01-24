@@ -1,11 +1,16 @@
 import React from 'react'
+import { useApolloClient} from '@apollo/react-hooks'
 
-const Books = (props) => {
-  if (!props.show) {
+const Books = ({show, result}) => {
+  if (!show) {
     return null
   }
 
-  const books = []
+  if (result.loading){
+    return <div>Loading...</div>
+  }
+  
+  const books = result.data.allBooks
 
   return (
     <div>
