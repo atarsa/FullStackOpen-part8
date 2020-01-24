@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks'
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
-
+import AuthorForm from './components/AuthorForm'
 
 const All_AUTHORS = gql`
 {
@@ -13,7 +13,7 @@ const All_AUTHORS = gql`
     name
     born
     bookCount
-    
+    id
   }
 }
 `
@@ -39,7 +39,19 @@ const ADD_BOOK = gql`
       published
     }
   }
+`
 
+const EDIT_AUTHOR = gql`
+  mutation editAuthor($name: String!, $born: Int!){
+    editAuthor(
+      name: $name,
+      setBornTo: $born
+    ){
+      name
+      born
+      id
+    }
+  }
 `
 const App = () => {
   const [page, setPage] = useState('authors')
@@ -60,6 +72,7 @@ const App = () => {
     refetchQueries: [{ query: ALL_BOOKS}]
   })
   
+  const [editAuthor] = useMutation(EDIT_AUTHOR)
   
   return (
     <div>
@@ -80,7 +93,11 @@ const App = () => {
         show={page === 'authors'}
         result={authors}
       />
-
+      
+      <AuthorForm
+        show={page === 'authors'} 
+        editAuthor={editAuthor}
+      />
       <Books
         show={page === 'books'}
         result={books}

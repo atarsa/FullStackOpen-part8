@@ -1,7 +1,7 @@
 import React from 'react'
 import { useApolloClient} from '@apollo/react-hooks'
 
- 
+
 
 const Authors = ({show, result}) => {
   
@@ -32,7 +32,7 @@ const Authors = ({show, result}) => {
             </th>
           </tr>
           {authors.map(a =>
-            <tr key={a.name}>
+            <tr key={a.id}>
               <td>{a.name}</td>
               <td>{a.born}</td>
               <td>{a.bookCount}</td>
@@ -40,7 +40,7 @@ const Authors = ({show, result}) => {
           )}
         </tbody>
       </table>
-
+      
     </div>
   )
 }

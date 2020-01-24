@@ -1,5 +1,4 @@
 import React from 'react'
-import { useApolloClient} from '@apollo/react-hooks'
 
 const Books = ({show, result}) => {
   if (!show) {
@@ -27,11 +26,11 @@ const Books = ({show, result}) => {
               published
             </th>
           </tr>
-          {books.map(a =>
-            <tr key={a.title}>
-              <td>{a.title}</td>
-              <td>{a.author}</td>
-              <td>{a.published}</td>
+          {books.map(b =>
+            <tr key={b.id}>
+              <td>{b.title}</td>
+              <td>{b.author}</td>
+              <td>{b.published}</td>
             </tr>
           )}
         </tbody>
