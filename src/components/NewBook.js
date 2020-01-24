@@ -1,21 +1,25 @@
 import React, { useState } from 'react'
 
-const NewBook = (props) => {
+const NewBook = ({ show, addBook }) => {
   const [title, setTitle] = useState('')
   const [author, setAuhtor] = useState('')
   const [published, setPublished] = useState('')
   const [genre, setGenre] = useState('')
   const [genres, setGenres] = useState([])
 
-  if (!props.show) {
+  if (!show) {
     return null
   }
-
+  
   const submit = async (e) => {
     e.preventDefault()
 
-    console.log('add book...')
+    await addBook({
+      
+      variables: { title, author, published, genres }
+    })
 
+    
     setTitle('')
     setPublished('')
     setAuhtor('')
@@ -34,6 +38,7 @@ const NewBook = (props) => {
         <div>
           title
           <input
+            required
             value={title}
             onChange={({ target }) => setTitle(target.value)}
           />
@@ -41,6 +46,7 @@ const NewBook = (props) => {
         <div>
           author
           <input
+            required
             value={author}
             onChange={({ target }) => setAuhtor(target.value)}
           />
@@ -48,9 +54,10 @@ const NewBook = (props) => {
         <div>
           published
           <input
+            required
             type='number'
             value={published}
-            onChange={({ target }) => setPublished(target.value)}
+            onChange={({ target }) => setPublished(parseInt(target.value))}
           />
         </div>
         <div>
