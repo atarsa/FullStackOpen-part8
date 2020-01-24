@@ -1,10 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useApolloClient} from '@apollo/react-hooks'
 
-const Authors = (props) => {
-  if (!props.show) {
+ 
+
+const Authors = ({show, result}) => {
+  
+  const client = useApolloClient()
+
+  if (!show) {
     return null
   }
-  const authors = []
+  
+  if (result.loading){
+    return <div>Loading...</div>
+  }
+  
+  const authors = result.data.allAuthors
 
   return (
     <div>
