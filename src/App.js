@@ -97,6 +97,7 @@ const App = () => {
       <AuthorForm
         show={page === 'authors'} 
         editAuthor={editAuthor}
+        authors={authors.data}
       />
       <Books
         show={page === 'books'}
